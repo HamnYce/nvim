@@ -25,13 +25,19 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
-require('lspconfig').gopls.setup({
-    settings = {
-        gopls = {
-            gofumpt = true
-        }
-    }
-})
+require("lspconfig").gopls.setup {
+  settings = {
+    gopls = {
+      gofumpt = true,
+    },
+  },
+}
+
+require("ufo").setup {
+  provider_selector = function()
+    return { "treesitter", "indent" }
+  end,
+}
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")

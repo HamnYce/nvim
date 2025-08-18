@@ -12,6 +12,12 @@ return {
       require "configs.lspconfig"
     end,
   },
+  {
+    "kevinhwang91/promise-async",
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
