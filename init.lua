@@ -26,14 +26,11 @@ require("lazy").setup({
 }, lazy_config)
 
 require("lspconfig").gopls.setup {
-  settings = {
-    gopls = {
-      gofumpt = true,
-    },
-  },
+  settings = {},
 }
 
 require("ufo").setup {
+  open_fold_hl_timeout = 150,
   provider_selector = function()
     return { "treesitter", "indent" }
   end,
