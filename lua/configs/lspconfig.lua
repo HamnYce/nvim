@@ -9,6 +9,7 @@ local servers = {
   "marksman",
   "nim_langserver",
   "clangd",
+  "zls",
 }
 
 vim.lsp.enable(servers)
