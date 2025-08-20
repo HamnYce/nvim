@@ -25,16 +25,21 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
+-- lsp
 require("lspconfig").gopls.setup {
   settings = {},
 }
 
+-- ufo
 require("ufo").setup {
   open_fold_hl_timeout = 150,
   provider_selector = function()
     return { "treesitter", "indent" }
   end,
 }
+
+vim.api.nvim_set_hl(0, "UfoFoldedFg", { fg = "#88C0D0" })
+vim.api.nvim_set_hl(0, "UfoFoldedEllipsis", { fg = "#dce0e8" })
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
