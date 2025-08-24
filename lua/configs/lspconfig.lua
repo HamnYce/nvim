@@ -11,6 +11,7 @@ local servers = {
   "clangd",
   "zls",
   "basedpyright",
+  "hls",
 }
 
 vim.lsp.enable(servers)
