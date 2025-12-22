@@ -7,11 +7,9 @@ local servers = {
   "gopls",
   "ts_ls",
   "marksman",
-  "nim_langserver",
   "clangd",
   "zls",
   "basedpyright",
-  "hls",
 }
 
 vim.lsp.enable(servers)
