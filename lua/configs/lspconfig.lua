@@ -10,8 +10,10 @@ local servers = {
   "nim_langserver",
   "clangd",
   "zls",
+  "ruff",
   "basedpyright",
   "hls",
+  "copilot",
 }
 
 vim.lsp.enable(servers)
