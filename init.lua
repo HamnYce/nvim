@@ -1,51 +1,61 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+-- Leader must be set before lazy loads anything
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+-- Load core options early so they apply before plugins
+require("core.options")
 
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", lazypath,
+  })
 end
-
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require "configs.lazy"
-
--- load plugins
-require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
+require("lazy").setup({ import = "plugins" }, {
+  defaults = { lazy = true },
+  change_detection = { notify = false },
+  ui = {
+    border = "rounded",
+    backdrop = 60,
+    icons = {
+      cmd        = " ",
+      config     = "",
+      event      = " ",
+      favorite   = " ",
+      ft         = " ",
+      init       = " ",
+      import     = " ",
+      keys       = " ",
+      lazy       = "󰒲 ",
+      loaded     = "●",
+      not_loaded = "○",
+      plugin     = " ",
+      runtime    = " ",
+      require    = "󰢱 ",
+      source     = " ",
+      start      = " ",
+      task       = "✔ ",
+      list       = { "●", "➜", "★", "‒" },
+    },
   },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip", "matchit", "matchparen", "netrwPlugin",
+        "tarPlugin", "tohtml", "tutor", "zipPlugin",
+        "2html_plugin", "spellfile_plugin",
+      },
+    },
+  },
+})
 
-  { import = "plugins" },
-}, lazy_config)
-
--- lsp
-local lspconfig = require "lspconfig"
-
--- ufo
-require("ufo").setup {
-  open_fold_hl_timeout = 300,
-  provider_selector = function()
-    return { "treesitter", "indent" }
-  end,
-}
-
-vim.api.nvim_set_hl(0, "UfoFoldedFg", { fg = "#88C0D0" })
-vim.api.nvim_set_hl(0, "UfoFoldedEllipsis", { fg = "#dce0e8" })
-
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-
-require "options"
-require "autocmds"
+require("core.autocmds")
 
 vim.schedule(function()
-  require "mappings"
+  require("core.keymaps")
 end)
