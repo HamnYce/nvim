@@ -18,8 +18,8 @@ opt.splitright     = true
 opt.list           = true
 opt.listchars      = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.fillchars      = {
-  foldopen  = "",
-  foldclose = "",
+  foldopen  = "▾",
+  foldclose = "▸",
   fold      = " ",
   foldsep   = " ",
   diff      = "╱",
