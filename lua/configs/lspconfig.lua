@@ -7,7 +7,6 @@ local servers = {
   "gopls",
   "ts_ls",
   "marksman",
-  "nim_langserver",
   "clangd",
   "zls",
   "ruff",
